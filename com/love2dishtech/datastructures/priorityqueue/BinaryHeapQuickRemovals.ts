@@ -24,6 +24,15 @@ export class BinaryHeapQuickRemovals<T> {
      */
     private heap: T[]
 
+    /**
+     * Internal Hash Table storage used for indexing the elements in the binary heap.
+     * This provides O(1) find and contains operation as compared to linear scan - O(n).
+     * 
+     * Let's the overall performance of the remove operation to be O(log n) as comapred to O(n).
+     * 
+     * Uses O(n) more storage for additional indexes.
+     * 
+     */
     private heapIndex: Map<T, Set<number>> = new Map();
 
     /**
