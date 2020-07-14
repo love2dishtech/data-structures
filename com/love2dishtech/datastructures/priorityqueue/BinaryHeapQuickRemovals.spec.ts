@@ -1,4 +1,5 @@
 import { BinaryHeapQuickRemovals as BinaryHeap } from "./BinaryHeapQuickRemovals"
+import { execPath } from "process";
 
 describe("Binary Heap", () => {
     test("Creates a heap with 0 elements with no added elements.", () => {
@@ -170,5 +171,25 @@ describe("Binary Heap", () => {
         expect(heap.remove(12)).toBe(12)
         expect(heap.remove(32)).toBe(32)
         expect(heap.remove(3)).toBe(3)
+    })
+
+    test("check if the binary heap is a min heap", () => {
+        const heap = new BinaryHeap([4, 2, 3, 1, 5, 0])
+        heap.add(7)
+        heap.add(8)
+        heap.add(6)
+        const result: number[] = []
+        while(heap.size() > 0) {
+            result.push(heap.poll())
+        }
+        expect(result).toStrictEqual([0, 1, 2, 3, 4, 5, 6, 7, 8])
+    })
+
+    test("validates with the min heap invariant", () => {
+        const heap = new BinaryHeap([4, 2, 3, 1, 5, 0])
+        heap.add(7)
+        heap.add(8)
+        heap.add(6)
+        expect(heap.isMinHeap(0)).toBeTruthy()
     })
 });

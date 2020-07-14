@@ -1,4 +1,5 @@
 import { promisify } from "util";
+import { indexOf } from "lodash";
 
 /**
  * A min priority queue implementation using binary heap.
@@ -337,5 +338,25 @@ export class BinaryHeapQuickRemovals<T> {
     private containsHashTableScan(element: T) {
         const positions = this.find(element)
         return positions !== undefined && positions.size > 0
+    }
+
+    /**
+     * Validates the min heap using the heap invariant.
+     */
+    public isMinHeap(idx: number): boolean {
+
+        if (idx >= this.heapSize) {
+            return true
+        }
+
+        const leftChild = idx * 2 + 1
+        const rightChild = idx * 2 + 2
+
+        // Validates the heap invariant is valid with the child elements and the root.
+        if (leftChild < this.heapSize && this.less(leftChild, idx)) return false
+        if (rightChild < this.heapSize && this.less(rightChild, idx)) return false
+
+        // Validates recursively.
+        return this.isMinHeap(leftChild) && this.isMinHeap(rightChild)
     }
 }
