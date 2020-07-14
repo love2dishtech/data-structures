@@ -158,4 +158,17 @@ describe("Binary Heap", () => {
         expect(heap.contains(5)).toBeFalsy()
         expect(() => heap.peek()).toThrowError()
     })
+
+    test("remove works well when adding elements dynamically", () => {
+        const heap = new BinaryHeap()
+        heap.add(31)
+        expect(heap.remove(31)).toBe(31)
+        heap.add(12)
+        heap.add(32)
+        heap.add(3)
+        expect(() => heap.remove(1)).toThrowError()
+        expect(heap.remove(12)).toBe(12)
+        expect(heap.remove(32)).toBe(32)
+        expect(heap.remove(3)).toBe(3)
+    })
 });

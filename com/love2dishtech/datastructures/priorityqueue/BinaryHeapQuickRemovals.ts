@@ -316,7 +316,11 @@ export class BinaryHeapQuickRemovals<T> {
 
         // Re-adjust the heap.
         this.bubbleDown(position)
-        this.bubbleUp(position)
+
+        // Either one of them is necessary, so we can simply try to bubble up only if bubbling down didn't work.
+        if (this.heapIndex.get(element)?.has(position)) {
+            this.bubbleUp(position)
+        }
 
         return element
     }
